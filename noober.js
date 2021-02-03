@@ -11,18 +11,15 @@ function levelOfService(ride) {
   }
   return levelOfService
 }
-
 function renderRides(ridesArray) {
   for (let i = 0; i < ridesArray.length; i++) {
     let ride = ridesArray[i]
-
     document.querySelector('.rides').insertAdjacentHTML('beforeend', `
       <h1 class="inline-block mt-8 px-4 py-2 rounded-xl text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
         <i class="fas fa-car-side"></i>
         <span>${levelOfService(ride)}</span>
       </h1>
     `)
-
     let borderClass
     let backgroundClass
     if (levelOfService(ride) == 'Noober Purple') {
@@ -32,10 +29,8 @@ function renderRides(ridesArray) {
       borderClass = 'border-gray-900'
       backgroundClass = 'bg-gray-600'
     }
-
     for (let i = 0; i < ride.length; i++) {
       let leg = ride[i]
-
       document.querySelector('.rides').insertAdjacentHTML('beforeend', `
         <div class="border-4 ${borderClass} p-4 my-4 text-left">
           <div class="flex">
@@ -66,8 +61,81 @@ function renderRides(ridesArray) {
     }
   }
 }
+window.addEventListener('DOMContentLoaded', async function() {
+ 
+  let response = await fetch("https://kiei451.com/api/rides.json")
+  let ride = await response.json()
+  let allRidesButton = document.querySelector("#all-filter")
 
-window.addEventListener('DOMContentLoaded', function() {
-  // YOUR CODE
+  allRidesButton.addEventListener("click", function(event){
+    event.preventDefault()
+    let deleteHTML = document.querySelector(".rides")
+    deleteHTML.innerHTML = ""
+    renderRides(ride)
+  })
+
+  let newArray = []
+  let nooberPurpleButton = document.querySelector("#noober-purple-filter")
+  nooberPurpleButton.addEventListener("click", function(event){
+    event.preventDefault()
+    alert('You have selected Noober Purple')
+    console.log("You have selected Noober Purple")
+    let newArray = []
+    for (i=0; i<ride.length; i++){
+      if (levelOfService(ride[i]) == 'Noober Purple'){  
+        newArray.push(ride[i])
+      }
+    }
+    let deleteHTML = document.querySelector(".rides")
+    deleteHTML.innerHTML = ""
+    renderRides(newArray)
+  })
+
+  let nooberPoolButton = document.querySelector("#noober-pool-filter")
+  nooberPoolButton.addEventListener("click", function(event){
+    event.preventDefault()
+    alert('You have selected Noober Pool')
+    console.log("You have selected Noober Pool")
+    let newArray = []
+    for (i=0; i<ride.length; i++){
+      if (levelOfService(ride[i]) == 'Noober Pool'){  
+        newArray.push(ride[i])
+      }
+    }
+    let deleteHTML = document.querySelector(".rides")
+    deleteHTML.innerHTML = ""
+    renderRides(newArray)
+  })
+
+  let nooberXLButton = document.querySelector("#noober-xl-filter")
+  nooberXLButton.addEventListener("click", function(event){
+    event.preventDefault()
+    alert('You have selected Noober XL')
+    console.log("You have selected Noober XL")
+    let newArray = []
+    for (i=0; i<ride.length; i++){
+      if (levelOfService(ride[i]) == 'Noober XL'){  
+        newArray.push(ride[i])
+      }
+    }
+    let deleteHTML = document.querySelector(".rides")
+    deleteHTML.innerHTML = ""
+    renderRides(newArray)
+  })
+
+  let nooberXButton = document.querySelector("#noober-x-filter")
+  nooberXButton.addEventListener("click", function(event){
+    event.preventDefault()
+    alert('You have selected Noober X')
+    console.log("You have selected Noober X")
+    let newArray = []
+    for (i=0; i<ride.length; i++){
+      if (levelOfService(ride[i]) == 'Noober X'){  
+        newArray.push(ride[i])
+      }
+    }
+    let deleteHTML = document.querySelector(".rides")
+    deleteHTML.innerHTML = ""
+    renderRides(newArray)
+  })
 })
-
